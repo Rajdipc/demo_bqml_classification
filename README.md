@@ -1,8 +1,18 @@
 # Employee Risk Classification for Early Warning System (EWS) on BigQuery ML
 
-This repository contains an end-to-end BigQuery ML (BQML) implementation for **Employee Risk Classification** in the **Early Warning System (EWS)**, migrating the model sandbox from an on-premise SQL Server + custom Python environment to a serverless, in-database architecture on Google Cloud BigQuery.
+[![Release](https://img.shields.io/badge/Release-v1.0.0-blue.svg)](https://github.com/Rajdipc/demo_bqml_classification/releases)
+[![Google Cloud](https://img.shields.io/badge/Google_Cloud-4285F4?logo=googlecloud&logoColor=white)](https://cloud.google.com/)
+[![BigQuery ML](https://img.shields.io/badge/BigQuery_ML-BQML-669DF6?logo=googlebigquery&logoColor=white)](https://cloud.google.com/bigquery/docs/bqml-introduction)
+[![SQL](https://img.shields.io/badge/Dialect-GoogleSQL-0F9D58?logo=googlecloud&logoColor=white)](https://cloud.google.com/bigquery)
+[![Model](https://img.shields.io/badge/Model-Boosted_Trees_(XGBoost)-34A853)](https://cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-create-boosted-tree)
+[![Explainable AI](https://img.shields.io/badge/XAI-ML.EXPLAIN__PREDICT-EA4335)](https://cloud.google.com/bigquery/docs/reference/standard-sql/bigqueryml-syntax-explain-predict)
+[![Automated Tests](https://img.shields.io/badge/Tests-63_Automated_Assertions-success)](sql/)
+
+`#BigQuery` &nbsp;•&nbsp; `#BigQueryML` &nbsp;•&nbsp; `#BQML` &nbsp;•&nbsp; `#GoogleCloud` &nbsp;•&nbsp; `#MachineLearning` &nbsp;•&nbsp; `#Classification` &nbsp;•&nbsp; `#XGBoost` &nbsp;•&nbsp; `#BoostedTrees` &nbsp;•&nbsp; `#ExplainableAI` &nbsp;•&nbsp; `#EarlyWarningSystem` &nbsp;•&nbsp; `#MLOps` &nbsp;•&nbsp; `#SQL`
 
 ---
+
+This repository contains an end-to-end BigQuery ML (BQML) implementation for **Employee Risk Classification** in the **Early Warning System (EWS)**, migrating the model sandbox from an on-premise SQL Server + custom Python environment to a serverless, in-database architecture on Google Cloud BigQuery.
 
 ## 📌 Overview
 
