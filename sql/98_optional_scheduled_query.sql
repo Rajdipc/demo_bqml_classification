@@ -1,0 +1,23 @@
+-- =====================================================================
+-- BEFORE RUNNING: replace every YOUR_PROJECT_ID in this file with your Google Cloud project ID.
+-- 98  OPTIONAL - monthly automation with a BigQuery Scheduled Query
+-- NOT needed for the demo (the sample data is static and every run retrains 7 models).
+-- Shown here so the customer sees how the monthly job is productionised.
+--
+-- UI steps (BigQuery Studio):
+--   1. Open a new query tab and paste the statement below (with the correct project/dataset).
+--   2. Click  Schedule  ->  Create new scheduled query.
+--   3. Name: ews_monthly_run   |   Repeats: Monthly   |   Day: 3 (after month-end data is loaded)
+--      Start time: 02:00        |   Location: us-central1
+--   4. Leave "Destination table" EMPTY (the procedure writes its own tables).
+--   5. Service account: one with BigQuery Data Editor + BigQuery Job User on the project.
+--   6. Notification: enable email on failure.
+--   7. Save. Runs appear under  Scheduled queries  ->  ews_monthly_run  ->  Run history.
+--
+-- Scoring month = the month that just closed (e.g. a run on 2026-10-03 scores 202609).
+-- @run_date is supplied automatically by the scheduler.
+-- =====================================================================
+
+-- CALL `YOUR_PROJECT_ID.demo_bqml_classification.sp_ews_monthly_run`(
+--   CAST(FORMAT_DATE('%Y%m', DATE_SUB(@run_date, INTERVAL 1 MONTH)) AS INT64)
+-- );

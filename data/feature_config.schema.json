@@ -1,0 +1,34 @@
+[
+ {
+  "name": "MODEL_FEATURES",
+  "type": "STRING"
+ },
+ {
+  "name": "ULK",
+  "type": "INT64"
+ },
+ {
+  "name": "KAS",
+  "type": "INT64"
+ },
+ {
+  "name": "JEM",
+  "type": "INT64"
+ },
+ {
+  "name": "PHY",
+  "type": "INT64"
+ },
+ {
+  "name": "MEY",
+  "type": "INT64"
+ },
+ {
+  "name": "JYZ",
+  "type": "INT64"
+ },
+ {
+  "name": "SFY",
+  "type": "INT64"
+ }
+]
