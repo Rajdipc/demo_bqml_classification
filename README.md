@@ -16,6 +16,9 @@ This repository contains an end-to-end BigQuery ML (BQML) implementation for **E
 
 ## 📌 Overview
 
+> [!NOTE]
+> **Demo & Synthetic Data Notice:** This repository is developed **strictly for demonstration and architectural evaluation purposes**. All datasets included in [`data/`](data/) (`Model_Data.csv`, `geo_config.csv`, and `feature_config.csv`) consist of **entirely synthetic, anonymized sample data**. No confidential, customer, or real employee Personally Identifiable Information (PII) is present.
+
 The solution replaces Python-based loops, external data extractions, and standalone serialized model objects with:
 - **In-Database Training & Scoring:** BigQuery ML Boosted Tree models trained and evaluated directly inside BigQuery.
 - **Dynamic Configuration:** Geo-specific feature selection and thresholds driven by configuration tables (`geo_config`, `feature_config`).
@@ -93,3 +96,20 @@ For complete technical specifications, architectural diagrams, operational proce
 
 4. **Scenario Validation:**
    - Run `sql/M1_*` through `sql/M4_*` to validate configuration adjustments, geo onboarding, idempotency, and error handling.
+
+---
+
+## 🏭 Extending to Production
+
+While this repository demonstrates end-to-end BQML modeling, explainability, and stored procedure logic on synthetic data, moving this solution to an enterprise production environment involves the following extensions:
+
+| Dimension | Demo Implementation | Production Architecture Extension |
+|---|---|---|
+| **Data Ingestion** | Static CSV loads via `bq load` / schema files | Automated ELT pipelines using **Cloud Dataflow** or **BigQuery Data Transfer Service (DTS)** ingesting directly from source HR systems (SQL Server, Workday, SAP). Enforce automated schema validation, deduplication, and quarantine tables for malformed records. |
+| **Workflow Orchestration** | Manual SQL runs / single Scheduled Query | Enterprise workflow orchestration using **Cloud Composer (Apache Airflow)** or **Cloud Workflows**. Orchestrate the end-to-end DAG: upstream data sync &rarr; feature store refresh &rarr; `sp_ews_monthly_run` &rarr; automated test assertion suites (`T1`–`T5`) &rarr; downstream publish & alerting. |
+| **Table Optimization & Cost** | Standard BigQuery tables | **Partitioning** on snapshot date (`DATE(snapshot_date)`) and **Clustering** on `GEO` and `employee_id`. Enforce partition filters in queries to prevent full table scans and minimize BigQuery analysis slot costs. |
+| **Security & Governance** | Dataset-level IAM permissions | **IAM Least Privilege** with dedicated Google Service Accounts for pipeline jobs. Enforce **Column-level Security (Policy Tags)** on sensitive attributes, **Row-Level Security (RLS)** by geography, **VPC Service Controls (VPC-SC)**, and **CMEK** encryption. |
+| **MLOps & Governance** | In-database model objects (`ews_model_<geo>`) | Centralized model tracking via **Vertex AI Model Registry**. Set up automated performance monitoring (ROC-AUC drift, prediction distribution drift, feature attribution shifts) with alerting triggers for model retraining. |
+| **Responsible AI & Fairness** | Business logic exclusion table (`feature_exclusions`) | Formal **Fairness & Bias Auditing** evaluated on mature historical cohorts across demographic dimensions prior to model deployment. Maintain model cards and compliance sign-off workflows. |
+| **Downstream Delivery** | Static BigQuery views (`v_ews_feed`) | Direct read integration from authorized BI dashboards (Looker / PowerBI) and reverse ETL via **Dataflow** or **Eventarc + Cloud Functions** to push Red/Amber risk alerts directly into the EWS operational systems. |
+
