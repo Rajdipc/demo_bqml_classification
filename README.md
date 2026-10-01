@@ -12,14 +12,22 @@ The solution replaces Python-based loops, external data extractions, and standal
 - **Explainability:** Native `ML.EXPLAIN_PREDICT` attribution identifying the top risk drivers per employee.
 - **Automated Verification:** 63 automated test assertions (`T1`-`T5`) and 4 business change scenarios (`M1`-`M4`).
 
-For complete technical specifications, architectural diagrams, and verification benchmarks, see the [BigQuery ML Classification Proposal](BigQuery_ML_Classification_Proposal.md).
+## 📖 Runbook & In-Depth Documentation
+
+For complete technical specifications, architectural diagrams, operational procedures, and verification benchmarks, refer to **[`Runbook.md`](Runbook.md)**. Key sections covered in the Runbook include:
+- **Architecture & System Mapping (§2 & §3):** Process mapping from SQL Server + Python to BigQuery ML.
+- **Feature Store & Configuration Design (§4 & §5):** Dynamic feature resolution and error guardrails.
+- **Model Training, Calibration & Explainability (§6 & §7):** Boosted Tree training, Red/Amber risk bucket calibration, and `ML.EXPLAIN_PREDICT` attribution.
+- **Production Stored Procedure & EWS Feeds (§8 & §9):** Automated monthly runs and downstream view integration.
+- **Automated Verification & Scenarios (§10):** 63 automated test assertions (`T1`–`T5`) and 4 business change scenarios (`M1`–`M4`).
+- **Decision Guide (§11):** Go/no-go criteria and validation evidence.
 
 ---
 
 ## 📂 Repository Structure
 
 ```text
-├── BigQuery_ML_Classification_Proposal.md   # Comprehensive proposal, solution design & verification approach
+├── Runbook.md                               # Comprehensive runbook, solution design & verification approach
 ├── README.md                                # Project summary & guide
 ├── data/                                    # Dataset samples and schemas
 │   ├── Model_Data.csv                       # Synthetic training & evaluation feature data
